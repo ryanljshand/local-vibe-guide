@@ -49,7 +49,7 @@ export const vibeData: VibeTile[] = [
     subVibes: [
       {
         id: 'cozy-cafe',
-        label: 'A cozy corner café',
+        label: 'A cozy corner cafe',
         icon: iconCoffee,
         color: 'amber',
         activities: [
@@ -60,11 +60,11 @@ export const vibeData: VibeTile[] = [
       },
       {
         id: 'grab-and-go',
-        label: 'Quick grab & go',
+        label: 'Quick grab and go',
         icon: iconCoffee,
         color: 'yellow',
         activities: [
-          { id: 'g1', name: 'Spella Caffè', tagline: 'Tiny cart, massive flavor, no fuss', address: 'SW Alder St', neighborhood: 'Downtown', image: cardCafe, tags: ['Street cart', 'Cash only', 'Fast'], walkTime: '4 min' },
+          { id: 'g1', name: 'Spella Caffe', tagline: 'Tiny cart, massive flavor, no fuss', address: 'SW Alder St', neighborhood: 'Downtown', image: cardCafe, tags: ['Street cart', 'Cash only', 'Fast'], walkTime: '4 min' },
           { id: 'g2', name: 'Never Coffee', tagline: 'Always coffee, never a bad mood', address: '4243 SE Belmont St', neighborhood: 'Sunnyside', image: cardCafe, tags: ['Drive-thru', 'Cold brew', 'Quick'], walkTime: '6 min' },
         ],
       },
@@ -84,17 +84,17 @@ export const vibeData: VibeTile[] = [
         color: 'blue',
         activities: [
           { id: 'b1', name: "Powell's City of Books", tagline: "The world's largest independent bookstore — get gloriously lost", address: '1005 W Burnside St', neighborhood: 'Pearl District', image: cardNeighborhood, tags: ['Massive selection', 'New & used', 'Map provided'], walkTime: '10 min' },
-          { id: 'b2', name: 'Annie Bloom\'s Books', tagline: 'A neighborhood treasure since 1978', address: '7834 SW Capitol Hwy', neighborhood: 'Multnomah Village', image: cardNeighborhood, tags: ['Independent', 'Community picks', 'Cozy'], walkTime: '22 min' },
+          { id: 'b2', name: "Annie Bloom's Books", tagline: 'A neighborhood treasure since 1978', address: '7834 SW Capitol Hwy', neighborhood: 'Multnomah Village', image: cardNeighborhood, tags: ['Independent', 'Community picks', 'Cozy'], walkTime: '22 min' },
         ],
       },
       {
         id: 'museum',
-        label: 'Museums & galleries',
+        label: 'Museums and galleries',
         icon: iconArt,
         color: 'lavender',
         activities: [
-          { id: 'm1', name: 'Portland Art Museum', tagline: 'The Pacific Northwest's finest cultural anchor', address: '1219 SW Park Ave', neighborhood: 'South Park Blocks', image: cardNeighborhood, tags: ['World class', 'Free Fridays', 'Rotating exhibits'], walkTime: '14 min' },
-          { id: 'm2', name: 'Oregon Historical Society', tagline: 'Surprisingly gripping. You'll stay way longer than planned.', address: '1200 SW Park Ave', neighborhood: 'South Park Blocks', image: cardNeighborhood, tags: ['History', 'Interactive', 'Free for kids'], walkTime: '13 min' },
+          { id: 'm1', name: 'Portland Art Museum', tagline: "The Pacific Northwest's finest cultural anchor", address: '1219 SW Park Ave', neighborhood: 'South Park Blocks', image: cardNeighborhood, tags: ['World class', 'Free Fridays', 'Rotating exhibits'], walkTime: '14 min' },
+          { id: 'm2', name: 'Oregon Historical Society', tagline: "Surprisingly gripping. You'll stay way longer than planned.", address: '1200 SW Park Ave', neighborhood: 'South Park Blocks', image: cardNeighborhood, tags: ['History', 'Interactive', 'Free for kids'], walkTime: '13 min' },
         ],
       },
     ],
@@ -108,7 +108,7 @@ export const vibeData: VibeTile[] = [
     subVibes: [
       {
         id: 'nature',
-        label: 'Parks & nature spots',
+        label: 'Parks and nature spots',
         icon: iconHike,
         color: 'green',
         activities: [
@@ -152,7 +152,7 @@ export const vibeData: VibeTile[] = [
         color: 'yellow',
         activities: [
           { id: 's1', name: 'Tasty n Daughters', tagline: 'Brunch lines that are completely worth it, every single time', address: '3808 N Williams Ave', neighborhood: 'Boise', image: cardCafe, tags: ['Brunch icon', 'Seasonal menu', 'Worth the wait'], walkTime: '20 min' },
-          { id: 's2', name: 'Pok Pok', tagline: 'Thai street food that changed Portland's food scene forever', address: '3226 SE Division St', neighborhood: 'Richmond', image: cardCafe, tags: ['Thai', 'James Beard', 'Communal tables'], walkTime: '22 min' },
+          { id: 's2', name: 'Pok Pok', tagline: "Thai street food that changed Portland's food scene forever", address: '3226 SE Division St', neighborhood: 'Richmond', image: cardCafe, tags: ['Thai', 'James Beard', 'Communal tables'], walkTime: '22 min' },
         ],
       },
     ],
@@ -166,17 +166,17 @@ export const vibeData: VibeTile[] = [
     subVibes: [
       {
         id: 'gallery',
-        label: 'Galleries & street art',
+        label: 'Galleries and street art',
         icon: iconArt,
         color: 'lavender',
         activities: [
-          { id: 'a1', name: 'Disjecta Contemporary Art Center', tagline: 'Where Portland's weirdest, best art lives', address: '8371 N Interstate Ave', neighborhood: 'Kenton', image: cardNeighborhood, tags: ['Free admission', 'Contemporary', 'Community-run'], walkTime: '30 min' },
-          { id: 'a2', name: 'Dossier Hotel Lobby Art', tagline: 'The hotel lobby that's actually a real gallery', address: '750 SW Alder St', neighborhood: 'Downtown', image: cardCafe, tags: ['Free', 'Rotating', 'Downtown'], walkTime: '6 min' },
+          { id: 'a1', name: 'Disjecta Contemporary Art Center', tagline: "Where Portland's weirdest, best art lives", address: '8371 N Interstate Ave', neighborhood: 'Kenton', image: cardNeighborhood, tags: ['Free admission', 'Contemporary', 'Community-run'], walkTime: '30 min' },
+          { id: 'a2', name: 'Dossier Hotel Lobby Art', tagline: "The hotel lobby that's actually a real gallery", address: '750 SW Alder St', neighborhood: 'Downtown', image: cardCafe, tags: ['Free', 'Rotating', 'Downtown'], walkTime: '6 min' },
         ],
       },
       {
         id: 'live-show',
-        label: 'Live shows & venues',
+        label: 'Live shows and venues',
         icon: iconArt,
         color: 'pink',
         activities: [
@@ -199,7 +199,7 @@ export const vibeData: VibeTile[] = [
         icon: iconDrinks,
         color: 'amber',
         activities: [
-          { id: 'cb1', name: 'Deschutes Brewery Portland', tagline: 'Bend's finest pint, right in the Pearl', address: '210 NW 11th Ave', neighborhood: 'Pearl District', image: cardCafe, tags: ['15+ taps', 'Full kitchen', 'Dog-friendly patio'], walkTime: '12 min' },
+          { id: 'cb1', name: 'Deschutes Brewery Portland', tagline: "Bend's finest pint, right in the Pearl", address: '210 NW 11th Ave', neighborhood: 'Pearl District', image: cardCafe, tags: ['15+ taps', 'Full kitchen', 'Dog-friendly patio'], walkTime: '12 min' },
           { id: 'cb2', name: 'Base Camp Brewing', tagline: 'Adventure-themed. The beers absolutely deliver.', address: '930 SE Oak St', neighborhood: 'Central Eastside', image: cardCafe, tags: ['Outdoor patio', 'Food trucks', 'Seasonal releases'], walkTime: '15 min' },
         ],
       },
@@ -218,13 +218,13 @@ export const vibeData: VibeTile[] = [
   {
     id: 'browse',
     label: 'Wandering and shopping',
-    sublabel: 'you\'re "just looking" but we both know',
+    sublabel: 'you are "just looking" but we both know',
     icon: iconShop,
     color: 'yellow',
     subVibes: [
       {
         id: 'vintage',
-        label: 'Vintage & thrift',
+        label: 'Vintage and thrift',
         icon: iconShop,
         color: 'yellow',
         activities: [
@@ -253,7 +253,7 @@ export const vibeData: VibeTile[] = [
     subVibes: [
       {
         id: 'easy-walk',
-        label: 'Easy walks & strolls',
+        label: 'Easy walks and strolls',
         icon: iconHike,
         color: 'green',
         activities: [
