@@ -53,11 +53,11 @@ export default function ConciergeFlow({ ctx }: Props) {
       <ContextBar ctx={ctx} />
 
       {/* Hero concierge banner */}
-      <div className="bg-card border-b border-border/40 px-4 py-6 text-center">
+      <div className="relative bg-card border-b border-border/40 px-4 py-6 text-center">
         {(screen === 'subvibes' || screen === 'activities') && (
           <button
             onClick={handleBack}
-            className="absolute left-4 mt-1 flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors font-body"
+            className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors font-body"
           >
             <ChevronLeft className="w-4 h-4" />
             Back
