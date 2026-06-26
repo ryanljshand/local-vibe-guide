@@ -8,6 +8,7 @@
 // so the app runs and is testable with zero keys.
 
 import type { Activity, EventItem, GeoContext, Mood, VenuePairing } from './types';
+import { sourceLabelOf } from './events';
 
 export interface EventWithPairings {
   event: EventItem;
@@ -93,6 +94,8 @@ function scaffold(item: EventWithPairings): Activity {
     tips: [],
     isLocalEvent: true,
     specialNote: null,
+    sourceLabel: sourceLabelOf(e),
+    url: e.url,
     playlists: playlistsForCategory(e.category),
     rating: undefined,
     reviewCount: undefined,

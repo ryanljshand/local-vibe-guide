@@ -39,11 +39,27 @@ export default function ActivityCard({ activity, animDelay = 0 }: ActivityCardPr
               Happening tonight
             </span>
           )}
+          {activity.sourceLabel && activity.sourceLabel !== 'Sample' && (
+            <span className="ml-auto text-[11px] font-body font-medium bg-card/85 text-foreground/80 px-2 py-0.5 rounded-full">
+              via {activity.sourceLabel}
+            </span>
+          )}
         </div>
       </div>
 
       <div className="p-4">
-        <h3 className="font-display font-bold text-foreground text-base leading-tight">{activity.title}</h3>
+        {activity.url ? (
+          <a
+            href={activity.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-display font-bold text-foreground text-base leading-tight hover:text-primary transition-colors"
+          >
+            {activity.title}
+          </a>
+        ) : (
+          <h3 className="font-display font-bold text-foreground text-base leading-tight">{activity.title}</h3>
+        )}
         <p className="mt-1 text-sm text-muted-foreground font-body italic leading-snug">{activity.description}</p>
 
         {activity.specialNote && (

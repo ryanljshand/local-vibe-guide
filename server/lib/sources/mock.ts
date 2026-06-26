@@ -84,6 +84,7 @@ export class MockEventProvider implements EventProvider {
         isFree: !!t.free,
         url: 'https://example.com/event',
         source: t.source,
+        sourceLabel: 'Sample',
       };
     });
   }

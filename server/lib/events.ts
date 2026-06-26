@@ -24,6 +24,23 @@ export function eventMoodFit(kind: MoodKind, ev: EventItem): number {
   return CATEGORY_TO_MOOD[ev.category] === kind ? 1 : 0;
 }
 
+const SOURCE_LABELS: Record<EventItem['source'], string> = {
+  ra: 'Resident Advisor',
+  dice: 'Dice',
+  luma: 'Luma',
+  editorial: 'Local press',
+  eventbrite: 'Eventbrite',
+  meetup: 'Meetup',
+  ticketmaster: 'Ticketmaster',
+  seatgeek: 'SeatGeek',
+  mock: 'Sample',
+};
+
+/** Human-facing credit for where an event was found. */
+export function sourceLabelOf(ev: EventItem): string {
+  return ev.sourceLabel ?? SOURCE_LABELS[ev.source] ?? 'Local';
+}
+
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 
 /**
@@ -95,6 +112,7 @@ export function dedupeEvents(events: EventItem[]): EventItem[] {
     const [base, other] = nicheScore(ev) >= nicheScore(existing) ? [ev, existing] : [existing, ev];
     byKey.set(key, {
       ...base,
+      sourceLabel: base.sourceLabel ?? other.sourceLabel,
       description: base.description ?? other.description,
       venueName: base.venueName ?? other.venueName,
       neighborhood: base.neighborhood ?? other.neighborhood,

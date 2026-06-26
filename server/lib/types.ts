@@ -69,6 +69,8 @@ export interface EventItem {
   imageUrl?: string;
   url: string;
   source: EventSource;
+  /** Human-facing credit for where it was found, e.g. "KCRW", "Resident Advisor". */
+  sourceLabel?: string;
   /** Source-native popularity signal (followers, sales, listing rank…), 0–1 when present. */
   popularity?: number;
   /** Derived 0–1 "how niche / hidden-gem" score. */
@@ -160,6 +162,10 @@ export interface Activity {
   tips: string[];
   isLocalEvent: boolean;
   specialNote?: string | null;
+  /** Where this event was surfaced from, e.g. "KCRW" — credited on the card. */
+  sourceLabel?: string;
+  /** Deep link to the original listing. */
+  url?: string;
   playlists: ActivityPlaylist[];
   /** Carried through for the UI (maps link, ranking transparency). */
   rating?: number;

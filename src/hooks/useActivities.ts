@@ -59,6 +59,8 @@ export interface Activity {
   tips: string[];
   isLocalEvent: boolean;
   specialNote?: string | null;
+  sourceLabel?: string;
+  url?: string;
   playlists: ActivityPlaylist[];
   lat?: number;
   lng?: number;
