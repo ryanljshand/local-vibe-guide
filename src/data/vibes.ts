@@ -39,6 +39,15 @@ export interface Activity {
   walkTime: string;
 }
 
+export function getAllActivities(): Activity[] {
+  return vibeData.flatMap((vibe) => vibe.subVibes?.flatMap((sub) => sub.activities) ?? []);
+}
+
+export function getActivitiesByIds(ids: string[]): Activity[] {
+  const byId = new Map(getAllActivities().map((a) => [a.id, a]));
+  return ids.map((id) => byId.get(id)).filter((a): a is Activity => Boolean(a));
+}
+
 export const vibeData: VibeTile[] = [
   {
     id: 'caffeine',

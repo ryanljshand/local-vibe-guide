@@ -1,12 +1,13 @@
 import { useState, useCallback } from 'react';
-import { ChevronLeft } from 'lucide-react';
-import { vibeData, type VibeTile, type SubVibeTile } from '@/data/vibes';
+import { ChevronLeft, Heart } from 'lucide-react';
+import { vibeData, getActivitiesByIds, type VibeTile, type SubVibeTile } from '@/data/vibes';
 import { type ConciergeContext, getTimeLabel } from '@/lib/concierge';
+import { useFavorites } from '@/hooks/use-favorites';
 import ContextBar from '@/components/ContextBar';
 import VibeTileCard from '@/components/VibeTileCard';
 import ActivityCard from '@/components/ActivityCard';
 
-type Screen = 'vibes' | 'subvibes' | 'activities';
+type Screen = 'vibes' | 'subvibes' | 'activities' | 'saved';
 
 interface Props {
   ctx: ConciergeContext;
@@ -14,9 +15,13 @@ interface Props {
 
 export default function ConciergeFlow({ ctx }: Props) {
   const [screen, setScreen] = useState<Screen>('vibes');
+  const [prevScreen, setPrevScreen] = useState<Screen>('vibes');
   const [selectedVibe, setSelectedVibe] = useState<VibeTile | null>(null);
   const [selectedSubVibe, setSelectedSubVibe] = useState<SubVibeTile | null>(null);
   const [slideDir, setSlideDir] = useState<'right' | 'left'>('right');
+
+  const { favorites } = useFavorites();
+  const savedActivities = getActivitiesByIds(favorites);
 
   const goTo = useCallback((next: Screen, dir: 'right' | 'left' = 'right') => {
     setSlideDir(dir);
@@ -33,20 +38,28 @@ export default function ConciergeFlow({ ctx }: Props) {
     goTo('activities', 'right');
   }, [goTo]);
 
+  const openSaved = useCallback(() => {
+    setPrevScreen(screen);
+    goTo('saved', 'right');
+  }, [screen, goTo]);
+
   const handleBack = useCallback(() => {
-    if (screen === 'activities') {
+    if (screen === 'saved') {
+      goTo(prevScreen, 'left');
+    } else if (screen === 'activities') {
       goTo('subvibes', 'left');
       setSelectedSubVibe(null);
     } else if (screen === 'subvibes') {
       goTo('vibes', 'left');
       setSelectedVibe(null);
     }
-  }, [screen, goTo]);
+  }, [screen, prevScreen, goTo]);
 
   const animClass = slideDir === 'right' ? 'slide-in-right' : 'slide-in-left';
 
   const timeLabel = getTimeLabel(ctx.timeOfDay);
   const day = ctx.dayName;
+  const showBack = screen !== 'vibes';
 
   return (
     <div className="min-h-screen bg-background">
@@ -54,7 +67,7 @@ export default function ConciergeFlow({ ctx }: Props) {
 
       {/* Hero concierge banner */}
       <div className="relative bg-card border-b border-border/40 px-4 py-6 text-center">
-        {(screen === 'subvibes' || screen === 'activities') && (
+        {showBack && (
           <button
             onClick={handleBack}
             className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors font-body"
@@ -63,6 +76,22 @@ export default function ConciergeFlow({ ctx }: Props) {
             Back
           </button>
         )}
+
+        {/* Saved shortcut */}
+        {screen !== 'saved' && (
+          <button
+            onClick={openSaved}
+            aria-label={`View saved spots${savedActivities.length ? ` (${savedActivities.length})` : ''}`}
+            className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm font-body text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+          >
+            <Heart className={`w-4 h-4 ${savedActivities.length ? 'fill-primary text-primary' : ''}`} />
+            <span className="hidden sm:inline">Saved</span>
+            {savedActivities.length > 0 && (
+              <span className="font-semibold text-foreground">{savedActivities.length}</span>
+            )}
+          </button>
+        )}
+
         {screen === 'vibes' && (
           <div>
             <p className="font-display text-muted-foreground text-sm font-semibold uppercase tracking-widest mb-1">
@@ -100,6 +129,21 @@ export default function ConciergeFlow({ ctx }: Props) {
             </h2>
             <p className="font-body text-muted-foreground text-sm mt-1">
               {selectedSubVibe.activities.length} places nearby
+            </p>
+          </div>
+        )}
+        {screen === 'saved' && (
+          <div>
+            <p className="font-display text-muted-foreground text-sm font-semibold uppercase tracking-widest mb-1">
+              Your shortlist
+            </p>
+            <h2 className="font-display font-bold text-foreground text-xl leading-snug">
+              Saved spots
+            </h2>
+            <p className="font-body text-muted-foreground text-sm mt-1">
+              {savedActivities.length === 0
+                ? 'Nothing saved yet'
+                : `${savedActivities.length} place${savedActivities.length === 1 ? '' : 's'} to come back to`}
             </p>
           </div>
         )}
@@ -163,6 +207,36 @@ export default function ConciergeFlow({ ctx }: Props) {
                 Start over — show me something different
               </button>
             </div>
+          </div>
+        )}
+
+        {screen === 'saved' && (
+          <div key="saved" className={`${animClass} max-w-2xl mx-auto px-4 py-6`}>
+            {savedActivities.length > 0 ? (
+              <div className="flex flex-col gap-4 stagger">
+                {savedActivities.map((act, i) => (
+                  <ActivityCard key={act.id} activity={act} animDelay={i * 100} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-16">
+                <div className="mx-auto mb-4 grid place-items-center w-14 h-14 rounded-full bg-secondary">
+                  <Heart className="w-6 h-6 text-muted-foreground" />
+                </div>
+                <p className="font-display font-semibold text-foreground text-lg">
+                  No saved spots yet
+                </p>
+                <p className="font-body text-muted-foreground text-sm mt-1 max-w-xs mx-auto">
+                  Tap the heart on any place to keep it here for later.
+                </p>
+                <button
+                  onClick={() => goTo('vibes', 'left')}
+                  className="mt-6 inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground font-body font-semibold text-sm px-5 py-2.5 hover:brightness-95 active:scale-[0.98] transition-all"
+                >
+                  Find something nearby
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

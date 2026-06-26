@@ -1,73 +1,76 @@
-# Welcome to your Lovable project
+# Local Vibe Guide
 
-## Project info
+Your city, by the mood you're in.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Local Vibe Guide is a small concierge web app that flips the usual "search for a
+place" model on its head. Instead of typing what you want, you tell it **how you
+feel** — _"getting a caffeine fix"_, _"hiding from the rain"_, _"eating something
+amazing"_ — and it walks you down to a hand-picked shortlist of nearby spots that
+match the moment, the weather, and the time of day.
 
-## How can I edit this code?
+The interaction is inspired by [Songza](https://en.wikipedia.org/wiki/Songza)'s
+old "concierge" flow: a few warm, opinionated taps instead of a blank search box.
 
-There are several ways of editing your application.
+## How it works
 
-**Use Lovable**
+1. **Pick a vibe** — eight mood tiles, framed by a live context bar (city,
+   neighborhood, weather, temperature, time of day).
+2. **Narrow it down** — each vibe fans out into a couple of sub-vibes
+   (e.g. _a cozy corner cafe_ vs. _quick grab and go_).
+3. **See your spots** — a curated set of real local places, each with a tagline,
+   tags, walk time, and address.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+From any spot you can:
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Get directions** — opens the location in Google Maps.
+- **Save it** — heart a place to keep it on your shortlist (persisted in
+  `localStorage`, synced across tabs). Revisit everything from the **Saved** view.
+- **Share it** — uses the native Web Share sheet, with a clipboard fallback.
 
-**Use your preferred IDE**
+The current dataset is Portland, OR. Swapping in another city is just editing
+[`src/data/vibes.ts`](src/data/vibes.ts) and the context in
+[`src/pages/Index.tsx`](src/pages/Index.tsx).
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Tech stack
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- [Vite](https://vitejs.dev/) + [React](https://react.dev/) + TypeScript
+- [Tailwind CSS](https://tailwindcss.com/) with [shadcn/ui](https://ui.shadcn.com/)
+- [Vitest](https://vitest.dev/) + Testing Library
 
-Follow these steps:
+## Project structure
+
+```
+src/
+  components/
+    ConciergeFlow.tsx   # the 3-step vibes → sub-vibes → spots flow + Saved view
+    ContextBar.tsx      # live weather/location strip
+    VibeTileCard.tsx    # the mood/sub-vibe tiles
+    ActivityCard.tsx    # a spot, with directions / save / share actions
+  data/vibes.ts         # the dataset + lookup helpers
+  hooks/use-favorites.ts# localStorage-backed saved-spots store
+  lib/concierge.ts      # time-of-day / weather helpers
+  pages/Index.tsx       # wires the context and renders the flow
+```
+
+## Getting started
+
+Requires [Node.js](https://nodejs.org/) (or [Bun](https://bun.sh/)).
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the dev server with hot reload
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Scripts
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+| Command            | What it does                          |
+| ------------------ | ------------------------------------- |
+| `npm run dev`      | Start the Vite dev server             |
+| `npm run build`    | Production build to `dist/`           |
+| `npm run preview`  | Preview the production build          |
+| `npm run lint`     | Run ESLint                            |
+| `npm test`         | Run the Vitest suite once             |
+| `npm run test:watch` | Run Vitest in watch mode            |
