@@ -72,6 +72,20 @@ npm run dev:all      # web (8080) + api (3001) together
 # or run them separately: `npm run dev` and `npm run server`
 ```
 
+### See real events without the browser
+
+The niche scrapers need **no API key** — on a machine with open network this
+prints genuine tonight-near-you events straight to your terminal:
+
+```sh
+npm run demo -- "Los Angeles, CA"          # default voice
+npm run demo -- "Brooklyn, NY" "Gen Z"     # pick a generation voice
+```
+
+It resolves context, ingests from the live sources (RA / KCRW & co. / Eventbrite),
+ranks, pairs venues, and prints the lineup. With no network it falls back to
+sample data and says so.
+
 ### Going live
 
 Copy `.env.example` to `.env` and add what you have — every key is optional and

@@ -26,7 +26,7 @@ export default tseslint.config(
   {
     // Backend: Node globals, and `any` is allowed at the external-JSON parsing
     // boundary (third-party API responses are untyped).
-    files: ["server/**/*.ts"],
+    files: ["server/**/*.ts", "scripts/**/*.ts"],
     languageOptions: {
       globals: globals.node,
     },
